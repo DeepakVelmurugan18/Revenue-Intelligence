@@ -1,0 +1,16 @@
+{
+  "name": "revenue-intelligence-inbox",
+  "version": "1.0.0",
+  "description": "SpendNest Revenue Intelligence Inbox and Evidence Workspace",
+  "scripts": {
+    "start": "serve candidate/app",
+    "build": "node candidate/scripts/generate_dataset_and_exports.js"
+  },
+  "keywords": [
+    "revenue-intelligence",
+    "sales-management",
+    "spendnest"
+  ],
+  "author": "Deepak Velmurugan",
+  "license": "MIT"
+}
