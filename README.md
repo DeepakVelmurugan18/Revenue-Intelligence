@@ -9,7 +9,16 @@ Please see the complete documentation and startup instructions in [`candidate/RE
 
 ---
 
-## 🚀 Quick Launch
+## 🌐 Live Vercel Deployment
+
+The application is configured for 1-click Vercel deployment with:
+- Crisp modern white/light luxury theme by default (with optional dark theme toggle).
+- Automatic `/` routing to the Revenue Intelligence Inbox workspace.
+- Pre-built `public/` distribution directory for instant, zero-error deployments.
+
+---
+
+## 🚀 Quick Local Launch
 
 Open `candidate/app/index.html` in your browser, or start a local server:
 ```bash
