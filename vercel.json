@@ -1,8 +1,4 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "outputDirectory": "public",
-  "redirects": [
-    { "source": "/", "destination": "/candidate/app/index.html", "permanent": false }
-  ]
+  "outputDirectory": "public"
 }

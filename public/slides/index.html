@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revenue Intelligence Inbox - Executive Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.12);
+      --teal: #0d9488;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --purple: #9333ea;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+    .title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    button {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    button:hover {
+      background: #f1f5f9;
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .deck-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 640px;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 48px;
+      position: relative;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.985); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+    }
+    .slide-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .slide-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: #0f172a;
+    }
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex: 1;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+    .card {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card.highlight {
+      border-color: #bae6fd;
+      background: #f0f9ff;
+    }
+    .card.danger {
+      border-color: #fecdd3;
+      background: #fff1f2;
+    }
+    .card.success {
+      border-color: #99f6e4;
+      background: #f0fdfa;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0f172a;
+    }
+    .card p, .card li {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #334155;
+    }
+    .card ul {
+      list-style-position: inside;
+      margin-top: 8px;
+    }
+    .citation {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #0369a1;
+      line-height: 1.5;
+    }
+    .citation.amber { border-left-color: var(--amber); color: #b45309; background: #fffbeb; }
+    .citation.rose { border-left-color: var(--rose); color: #be123c; background: #fff1f2; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: #f8fafc;
+    }
+    td strong { color: #0f172a; }
+    .code-tag {
+      font-family: 'JetBrains Mono', monospace;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: #0284c7;
+    }
+    footer {
+      padding: 16px 32px;
+      background: #ffffff;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.05);
+    }
+    .dots {
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(2, 132, 199, 0.4);
+      transform: scale(1.25);
+    }
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    @media print {
+      body { background: white; color: black; }
+      header, footer { display: none; }
+      .deck-container { padding: 0; display: block; }
+      .slide {
+        display: block !important;
+        page-break-after: always;
+        min-height: auto;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        background: white;
+        color: black;
+        margin-bottom: 40px;
+        padding: 24px;
+      }
+      .slide-title { color: #111; }
+      .card { background: #f8fafc; border: 1px solid #e2e8f0; color: #333; }
+      .card p, .card li { color: #333; }
+      .citation { background: #f1f5f9; color: #1e3a8a; }
+      th, td { border-bottom: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span class="badge">Assessment Presentation</span>
+      <span class="title">Revenue Intelligence Inbox &mdash; SpendNest Platform</span>
+    </div>
+    <div class="controls">
+      <a href="../app/index.html" class="back-link">🚀 Open Live Inbox Workspace</a>
+      <button onclick="window.print()">🖨️ Print / Save PDF</button>
+      <button id="fullscreenBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+  </header>
+
+  <div class="deck-container">
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide-1">
+      <div class="slide-header">
+        <div>
+          <div class="slide-num">Slide 1 of 5 &bull; Problem Definition &amp; Discoveries</div>
+          <h1 class="slide-title">The Manager Problem &amp; Three Essential Findings</h1>
+          <p class="slide-subtitle">How empirical transcript verification cuts through misleading dialer metadata and late data deliveries.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card highlight">
+          <div class="card-title">🔍 Finding 1: Rep Identity Mismatch (Call C06)</div>
+          <p><strong>Observation:</strong> Telephony metadata registers caller as <code>Meera</code> (<code>meera@example.com</code>). However, the audio transcript shows the caller opening with <em>"Good evening, Mr Nikhil... Ravi here. I'll say at the start that this is a cold call."</em></p>
+          <div class="citation amber">
+            <strong>Source Citation:</strong> [C06, 12216d5c]<br>
+            "Hello? Good evening, Mr Nikhil... Ravi here. I'll say at the start that this is a cold call."
+          </div>
+          <p style="margin-top:10px;"><strong>Product Impact:</strong> Dashboard decouples upstream user accounts from spoken agent identities, flagging seat-sharing anomalies and preventing erroneous coaching attribution.</p>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-title">⚖️ Finding 2: Misclassified Vendor Pitch (M02)</div>
+          <p><strong>Observation:</strong> Meeting M02 with LedgerBridge is titled <em>"LedgerBridge / SpendNest discussion"</em>. Automated classifiers treat this as an outbound sales pitch. In reality, SpendNest is evaluating LedgerBridge as an e-invoicing supplier.</p>
+          <div class="citation">
+            <strong>Source Citation:</strong> [M02, Turn 1-2]<br>
+            Turn 1: "We serve businesses with cards... and we are developing accounts receivable."<br>
+            Turn 2: "Supplier A: Then I will cover the market strategy as well as the technical integration."
+          </div>
+          <p style="margin-top:10px;"><strong>Product Impact:</strong> Created dedicated <code>Vendor Evaluation</code> route to isolate supplier evaluations from customer pipelines and protect sales metrics.</p>
+        </div>
+
+        <div class="card danger">
+          <div class="card-title">🚨 Finding 3: Critical Bugs in Late Batch (M07)</div>
+          <p><strong>Observation:</strong> Withheld initially, batch 2 reveals Willowfield Trust screen-sharing two severe bugs: (1) silent description save failure; (2) Recreate Payment attachment upload blocker.</p>
+          <div class="citation rose">
+            <strong>Source Citation:</strong> [M07, Turn 3-4 &amp; 8]<br>
+            Turn 3-4: "The field still shows the earlier wording... Yes, it is still the old description."<br>
+            Turn 8: "When I go through this route, I cannot upload a document."
+          </div>
+          <p style="margin-top:10px;"><strong>Product Impact:</strong> Replay engine transitions record to <code>Product Bug Escalation</code>, generates engineering repro steps, and alerts leadership in the Daily Brief.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <div>
+          <div class="slide-num">Slide 2 of 5 &bull; UX Architecture &amp; Intentional Omissions</div>
+          <h1 class="slide-title">Interface Choices &amp; Deliberately Rejected Decisions</h1>
+          <p class="slide-subtitle">Designing for managerial actionability while guarding against speculative numbers.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📐 Interface Hierarchy &amp; Workflow Design</div>
+          <ul>
+            <li><strong>Manager Daily Briefing (21 Aug 2026 Asia/Kolkata):</strong> Surfaces P1 escalations, key follow-ups, and coaching highlights at a glance.</li>
+            <li><strong>Mathematical Integrity Cockpit:</strong> Exposes explicit denominators (e.g., 18/44 usable coverage; 11/30 stored connection rate). Separates Call Reps from Meeting Organizers.</li>
+            <li><strong>Specialized Action Cards:</strong> Differentiates output format by category (Coaching cards, Deal action cards, Bug repro cards).</li>
+            <li><strong>Evidence Inspector &amp; Audio Reader:</strong> Turn-by-turn timestamps, click-to-quote citations, and verifiable manual route override audit trails.</li>
+            <li><strong>Interactive Replay Stepper:</strong> Step-by-step verification of initial batch, idempotent reload, route override, update batch, and persistence.</li>
+          </ul>
+        </div>
+
+        <div class="card danger">
+          <div class="card-title">🚫 Deliberately Rejected Decision: Synthetic Pipeline Valuation</div>
+          <p><strong>The Considered Alternative:</strong> Synthesizing CRM deal dollar values and win-probability forecasts from conversational currency mentions.</p>
+          <p style="margin-top:8px;"><strong>Why Rejected:</strong> In M03, Customer B mentions <em>"perhaps INR 26–39 lakh a month"</em> of manual vendor spend. In M10, Team member A mentions an <em>"INR 6,240"</em> subscription deduction. Naive algorithms parse these as SaaS deal values.</p>
+          <div class="citation amber">
+            <strong>Data Contract Warning:</strong> "No CRM opportunity table, authoritative deal value, or full account history is supplied. Missing inputs cannot be replaced by guesses."
+          </div>
+          <p style="margin-top:10px;"><strong>Accepted Trade-off:</strong> We deliberately omit dollar revenue forecasting. Instead, we display qualitative evaluation signals ("High Intent", "Budget Constrained") and verified operational action items.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <div>
+          <div class="slide-num">Slide 3 of 5 &bull; Routing Architecture &amp; Complex Cases</div>
+          <h1 class="slide-title">Routing Taxonomy, Export Design &amp; The Difficult Case</h1>
+          <p class="slide-subtitle">Multi-destination taxonomy, machine-readable manifest, and deep semantic disambiguation.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🗂️ 8 Specialized Routes + Intake Classification</div>
+          <table>
+            <thead>
+              <tr><th>Route Category</th><th>Target Purpose &amp; Sample Records</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sales Coaching</strong></td><td>Behavioral feedback &amp; boundary training (C01, C03, C06, C09, M03)</td></tr>
+              <tr><td><strong>Deal Progression</strong></td><td>Active prospect evaluations &amp; next steps (M03 Asterloom, C03, C04)</td></tr>
+              <tr><td><strong>Partner Referrals</strong></td><td>Advisory &amp; incorporation referrals (M01 Harborpath, C07 Willowbank)</td></tr>
+              <tr><td><strong>Vendor Evaluation</strong></td><td>SpendNest evaluates 3rd-party tech suppliers (M02 LedgerBridge)</td></tr>
+              <tr><td><strong>Customer Success</strong></td><td>Retention, onboarding &amp; migrations (M04 Cedarwave, M09 Brookmint)</td></tr>
+              <tr><td><strong>Product Bug Escalation</strong></td><td>Defect reproduction for engineering (M07 Willowfield, M09)</td></tr>
+              <tr><td><strong>Internal Training</strong></td><td>Operations &amp; billing walkthroughs (M10 Billing Engine)</td></tr>
+              <tr><td><strong>Outbound Leads</strong></td><td>Nurture leads &amp; competitor intelligence (C05, C08, C10)</td></tr>
+              <tr><td><strong>Intake / Unusable</strong></td><td>Strict non-hallucinatory tracking for silent/cancelled records (B01–B20, etc.)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-title">🧩 The Difficult Case: Meeting M02 (LedgerBridge)</div>
+          <p><strong>The Ambiguity:</strong> Meeting titled <em>"LedgerBridge / SpendNest discussion"</em>. Inbound AI classifiers routinely label this as a sales opportunity.</p>
+          <p style="margin-top:8px;"><strong>Transcript Evidence:</strong> SpendNest's strategy lead is evaluating LedgerBridge's e-invoicing API. SpendNest is the <em>customer</em>, LedgerBridge is the <em>vendor</em>.</p>
+          <div class="citation">
+            <strong>Turn 34 Citation:</strong> "Our evaluation goes through product fit, the business reason, commercials, then references and support checks."
+          </div>
+          <p style="margin-top:10px;"><strong>Export Manifest &amp; Context Preservation:</strong> Outputs are organized in <code>candidate/exports/vendors/</code> with manifest entries linking primary and secondary routes, preventing cross-contamination with deals.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" id="slide-4">
+      <div class="slide-header">
+        <div>
+          <div class="slide-num">Slide 4 of 5 &bull; Audit Verification &amp; Calculations</div>
+          <h1 class="slide-title">Verification of Key Numbers &amp; Analytical Grounding</h1>
+          <p class="slide-subtitle">100% mathematically verified denominators and citation-anchored analytical outputs.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-title">📊 Mathematical Denominator Integrity Audit</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric Name</th>
+              <th>Verified Number</th>
+              <th>Exact Denominator &amp; Calculation Definition</th>
+              <th>Audit Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Total Selected Records</strong></td>
+              <td><strong>44</strong></td>
+              <td>Distinct <code>(source_type, source_id)</code> pairs across both batches</td>
+              <td>Contract Rule #1</td>
+            </tr>
+            <tr>
+              <td><strong>Interaction Date Range</strong></td>
+              <td><strong>21 Aug 2026</strong></td>
+              <td>All call <code>started_at</code> and meeting <code>starts_at</code> shifted to Asia/Kolkata</td>
+              <td>Dictionary Section 2</td>
+            </tr>
+            <tr>
+              <td><strong>Initial Usable Coverage</strong></td>
+              <td><strong>17 / 44 (38.6%)</strong></td>
+              <td>Batch 1 records with nonblank transcript or turns &gt; 0 (10 calls + 7 meetings)</td>
+              <td>Batch <code>initial-001</code></td>
+            </tr>
+            <tr>
+              <td><strong>Post-Update Coverage</strong></td>
+              <td><strong>18 / 44 (40.9%)</strong></td>
+              <td>Total usable records after M07 Rev 2 arrives (10 calls + 8 meetings)</td>
+              <td>Batch <code>update-002</code></td>
+            </tr>
+            <tr>
+              <td><strong>Stored Call Connection Rate</strong></td>
+              <td><strong>11 / 30 (36.7%)</strong></td>
+              <td>Calls with <code>is_connected === true</code> / total calls (9 C-calls + B11, B14)</td>
+              <td>Dictionary Section 5</td>
+            </tr>
+            <tr>
+              <td><strong>Call Conversation Rate</strong></td>
+              <td><strong>9 / 30 (30.0%)</strong></td>
+              <td>Calls with <code>is_conversation === true</code> / total calls (C01-C03, C05-C10)</td>
+              <td>Stored Telephony Flag</td>
+            </tr>
+            <tr>
+              <td><strong>Rep vs. Organiser Isolation</strong></td>
+              <td><strong>5 Reps &bull; 7 Orgs</strong></td>
+              <td>Call reps (Arun, Meera, etc.) isolated from Meeting Organizers (<code>team06-12</code>)</td>
+              <td>Contract Rule #4</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-2">
+        <div class="card success">
+          <div class="card-title">✅ Citation Anchoring: Asterloom Systems (M03)</div>
+          <p><strong>Conclusion:</strong> Rep pushed prematurely for next call; prospect explicitly required internal CFO review.</p>
+          <div class="citation">
+            <strong>Turn 36 Citation:</strong> "Send the details first. We need time with the CFO and will tell you if another call is needed. Let us make that decision internally before scheduling more."
+          </div>
+        </div>
+        <div class="card success">
+          <div class="card-title">✅ Citation Anchoring: Willowfield Trust (M07)</div>
+          <p><strong>Conclusion:</strong> P1 silent data loss on event payment edits.</p>
+          <div class="citation">
+            <strong>Turn 2-4 Citation:</strong> "I am changing this event-payment description... The field still shows the earlier wording. So the change is not appearing after you save, is that right? Yes."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" id="slide-5">
+      <div class="slide-header">
+        <div>
+          <div class="slide-num">Slide 5 of 5 &bull; Technical Review &amp; Roadmap</div>
+          <h1 class="slide-title">Trade-offs, AI Usage, Limitations &amp; Future Vision</h1>
+          <p class="slide-subtitle">Transparent disclosure of architectural choices, known constraints, and future evolution.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">⚖️ Technical Trade-offs</div>
+          <p><strong>Deterministic Engine vs. Live LLM Calls:</strong> Pre-generated deep intelligence for all 44 records guarantees 100% reproducible tests without requiring reviewers to provide paid API keys or face rate limits.</p>
+          <p style="margin-top:10px;"><strong>Client-Side Replay Machine:</strong> Transactional state machine with <code>localStorage</code> persistence and in-browser ZIP generation allows instant launch with zero installation.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🤖 AI Methodology &amp; Boundaries</div>
+          <p><strong>Analytical Acceleration:</strong> AI was used to cross-examine timelines, extract structured MEDDPICC items, and identify speaker discrepancies (e.g., C06 Meera vs. Ravi).</p>
+          <p style="margin-top:10px;"><strong>Zero Hallucination Rule:</strong> Every analytical sentence is mapped to an exact passage. Background records (B01–B20, M05/M08/M11–M14) are strictly held in intake status without fabricated summaries.</p>
+        </div>
+
+        <div class="card highlight">
+          <div class="card-title">🚀 Limitations &amp; Production Roadmap</div>
+          <p><strong>Current Limitations:</strong> Single-day extract (21 Aug 2026); anonymized phone tokens prevent geo-calling analysis; no authoritative CRM deal stage table.</p>
+          <p style="margin-top:10px;"><strong>Future Roadmap:</strong></p>
+          <ul>
+            <li>Live webhook ingestion for Zoom, Gong &amp; Twilio.</li>
+            <li>Bi-directional CRM sync (pushing verified next steps to HubSpot/Salesforce).</li>
+            <li>Direct Jira P1 ticket dispatch from bug transcripts.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="dots">
+      <div class="dot active" onclick="goToSlide(0)"></div>
+      <div class="dot" onclick="goToSlide(1)"></div>
+      <div class="dot" onclick="goToSlide(2)"></div>
+      <div class="dot" onclick="goToSlide(3)"></div>
+      <div class="dot" onclick="goToSlide(4)"></div>
+    </div>
+    <div class="nav-btns">
+      <button id="prevBtn" onclick="prevSlide()">← Previous</button>
+      <button id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlide() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlide();
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Home') goToSlide(0);
+      if (e.key === 'End') goToSlide(slides.length - 1);
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        document.getElementById('fullscreenBtn').innerText = '✕ Exit Fullscreen';
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        document.getElementById('fullscreenBtn').innerText = '⛶ Fullscreen';
+      }
+    }
+
+    updateSlide();
+  </script>
+</body>
+</html>
