@@ -653,4 +653,20 @@ fs.writeFileSync(
 );
 console.log('Wrote candidate/app/data.js');
 
-console.log('--- ALL DATASET & EXPORTS GENERATED SUCCESSFULLY ---');
+// Automatically prepare Vercel public/ output directory
+const publicDir = path.join(__dirname, '../../public');
+if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
+
+// Copy root index.html to public
+const rootIndex = path.join(__dirname, '../../index.html');
+if (fs.existsSync(rootIndex)) {
+  fs.copyFileSync(rootIndex, path.join(publicDir, 'index.html'));
+}
+
+// Copy candidate folder into public/candidate
+const publicCandidate = path.join(publicDir, 'candidate');
+fs.cpSync(path.join(__dirname, '..'), publicCandidate, { recursive: true });
+
+console.log('--- VERCEL PUBLIC DIRECTORY PREPARED AT: public/ ---');
+console.log('--- ALL DATASET, EXPORTS & VERCEL ASSETS GENERATED SUCCESSFULLY ---');
+
